@@ -6,20 +6,26 @@ import html from 'remark-html'
 
 const postsDirectory = path.join(process.cwd(), 'posts')
 
-export function getSortedPostsData() {
-  const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames.map(fileName => {
-    const id = fileName.replace(/\.md$/, '')
+interface PostData {
+  id: string,
+  contentHtml?: string,
+  title: string,
+  date: string
+}
 
-    const fullPath = path.join(postsDirectory, fileName)
-    const fileContents = fs.readFileSync(fullPath, 'utf-8')
-
+export function getSortedPostsData(): PostData[] {
+  const fileNames: string[] = fs.readdirSync(postsDirectory)
+  const allPostsData: PostData[] = fileNames.map(fileName => {
+    const fullPath: string = path.join(postsDirectory, fileName)
+    const fileContents: string = fs.readFileSync(fullPath, 'utf-8')
     const matterResult = matter(fileContents)
 
-    return {
-      id,
-      ...matterResult.data
-    }
+    const id: string = fileName.replace(/\.md$/, '')
+    const title: string = matterResult.data.title
+    const date: string = matterResult.data.date
+    const postData: PostData = { id, title, date }
+
+    return postData
   })
 
   return allPostsData.sort(({ date: a }, { date: b }) => {
@@ -34,7 +40,7 @@ export function getSortedPostsData() {
 }
 
 export function getAllPostIds() {
-  const fileNames = fs.readdirSync(postsDirectory)
+  const fileNames: string[] = fs.readdirSync(postsDirectory)
 
   return fileNames.map(fileName => {
     return {
@@ -45,20 +51,24 @@ export function getAllPostIds() {
   })
 }
 
-export async function getPostData(id) {
-  const fullPath = path.join(postsDirectory, `${id}.md`)
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
+export async function getPostData(id: string) {
+  const fullPath: string = path.join(postsDirectory, `${id}.md`)
+  const fileContents: string = fs.readFileSync(fullPath, 'utf8')
 
   const matterResult = matter(fileContents)
 
   const processedContent = await remark()
     .use(html)
     .process(matterResult.content)
-  const contentHtml = processedContent.toString()
-
-  return {
+  const contentHtml: string = processedContent.toString()
+  const title: string = matterResult.data.title
+  const date: string = matterResult.data.date
+  const postData: PostData = {
     id,
     contentHtml,
-    ...matterResult.data
+    title,
+    date
   }
+
+  return postData
 }
