@@ -6,7 +6,7 @@ import html from 'remark-html'
 
 const postsDirectory: string = path.join(process.cwd(), 'posts')
 
-interface PostData {
+export type PostData = {
   id: string,
   contentHtml?: string,
   title: string,
