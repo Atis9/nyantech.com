@@ -4,7 +4,7 @@ import matter from 'gray-matter'
 import { remark } from 'remark'
 import html from 'remark-html'
 
-const postsDirectory = path.join(process.cwd(), 'posts')
+const postsDirectory: string = path.join(process.cwd(), 'posts')
 
 interface PostData {
   id: string,
