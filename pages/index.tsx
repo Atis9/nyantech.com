@@ -1,20 +1,20 @@
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
-import { getSortedPosts, Post } from '../lib/posts'
+import { getSortedPostSummaries, PostSummary } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
 
 export async function getStaticProps() {
-  const allPosts = getSortedPosts()
+  const allPostSummaries = getSortedPostSummaries()
   return {
     props: {
-      allPosts
+      allPostSummaries
     }
   }
 }
 
-export default function Home({ allPosts }: { allPosts: Post[] }) {
+export default function Home({ allPostSummaries }: { allPostSummaries: PostSummary[] }) {
   return (
     <Layout home={true}>
       <Head>
@@ -31,7 +31,7 @@ export default function Home({ allPosts }: { allPosts: Post[] }) {
       <section>
         <h2 className={utilStyles.headingLg}>Blog</h2>
         <ul className={utilStyles.list}>
-          {allPosts.map(({ id, date, title }) => (
+          {allPostSummaries.map(({ id, date, title }) => (
             <li className={utilStyles.listItem} key={id}>
               <Link href={`/posts/${id}`}>
                 <a>{title}</a>
