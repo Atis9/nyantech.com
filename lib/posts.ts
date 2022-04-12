@@ -52,31 +52,33 @@ export function getAllPostIds(): { params: { id: string }}[] {
 }
 
 export function getPostSummary(id: string): PostSummary {
-  const fullPath: string = path.join(postsDirectory, `${id}.md`)
-  const fileContents: string = fs.readFileSync(fullPath, 'utf8')
+  const RawPost = loadRawPost(id)
 
-  const matterResult = matter(fileContents)
-
-  const title: string = matterResult.data.title
-  const date: string = matterResult.data.date
+  const title: string = RawPost.data.title
+  const date: string = RawPost.data.date
   const postSummary: PostSummary = { id, title, date }
 
   return postSummary
 }
 
 export async function getPost(id: string): Promise<Post> {
-  const fullPath: string = path.join(postsDirectory, `${id}.md`)
-  const fileContents: string = fs.readFileSync(fullPath, 'utf8')
-
-  const matterResult = matter(fileContents)
+  const RawPost = loadRawPost(id)
 
   const processedContent = await remark()
     .use(html)
-    .process(matterResult.content)
+    .process(RawPost.content)
   const contentHtml: string = processedContent.toString()
-  const title: string = matterResult.data.title
-  const date: string = matterResult.data.date
+  const title: string = RawPost.data.title
+  const date: string = RawPost.data.date
   const post: Post = { id, contentHtml, title, date }
 
   return post
+}
+
+function loadRawPost(id: string): matter.GrayMatterFile<string> {
+  const fullPath: string = path.join(postsDirectory, `${id}.md`)
+  const fileContents: string = fs.readFileSync(fullPath, 'utf8')
+  const RawPost = matter(fileContents)
+
+  return RawPost
 }
