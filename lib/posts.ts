@@ -6,16 +6,16 @@ import html from 'remark-html'
 
 const postsDirectory: string = path.join(process.cwd(), 'posts')
 
-export type PostData = {
+export type Post = {
   id: string,
   contentHtml?: string,
   title: string,
   date: string
 }
 
-export function getSortedPostsData(): PostData[] {
+export function getSortedPosts(): Post[] {
   const fileNames: string[] = fs.readdirSync(postsDirectory)
-  const allPostsData: PostData[] = fileNames.map(fileName => {
+  const allPosts: Post[] = fileNames.map(fileName => {
     const fullPath: string = path.join(postsDirectory, fileName)
     const fileContents: string = fs.readFileSync(fullPath, 'utf-8')
     const matterResult = matter(fileContents)
@@ -23,12 +23,12 @@ export function getSortedPostsData(): PostData[] {
     const id: string = fileName.replace(/\.md$/, '')
     const title: string = matterResult.data.title
     const date: string = matterResult.data.date
-    const postData: PostData = { id, title, date }
+    const post: Post = { id, title, date }
 
-    return postData
+    return post
   })
 
-  return allPostsData.sort((a, b) => {
+  return allPosts.sort((a, b) => {
     if (a.date < b.date) {
       return 1
     } else if (a.date > b.date) {
@@ -51,7 +51,7 @@ export function getAllPostIds() {
   })
 }
 
-export async function getPostData(id: string) {
+export async function getPost(id: string) {
   const fullPath: string = path.join(postsDirectory, `${id}.md`)
   const fileContents: string = fs.readFileSync(fullPath, 'utf8')
 
@@ -63,12 +63,12 @@ export async function getPostData(id: string) {
   const contentHtml: string = processedContent.toString()
   const title: string = matterResult.data.title
   const date: string = matterResult.data.date
-  const postData: PostData = {
+  const post: Post = {
     id,
     contentHtml,
     title,
     date
   }
 
-  return postData
+  return post
 }
