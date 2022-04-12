@@ -4,7 +4,7 @@ import Head from 'next/head'
 import Date from '../../components/date'
 import utilStyles from '../../styles/utils.module.css'
 
-export default function ShowPost({ post }: { post: Post }) {
+export default function showPost({ post }: { post: Post }) {
   return (
     <Layout home={false}>
       <Head>
