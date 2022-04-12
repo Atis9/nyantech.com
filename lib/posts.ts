@@ -6,29 +6,27 @@ import html from 'remark-html'
 
 const postsDirectory: string = path.join(process.cwd(), 'posts')
 
-export type PostData = {
+export interface PostSummary {
   id: string,
-  contentHtml?: string,
   title: string,
   date: string
 }
 
-export function getSortedPostsData(): PostData[] {
-  const fileNames: string[] = fs.readdirSync(postsDirectory)
-  const allPostsData: PostData[] = fileNames.map(fileName => {
-    const fullPath: string = path.join(postsDirectory, fileName)
-    const fileContents: string = fs.readFileSync(fullPath, 'utf-8')
-    const matterResult = matter(fileContents)
+export interface Post {
+  id: string,
+  title: string,
+  date: string,
+  contentHtml: string
+}
 
-    const id: string = fileName.replace(/\.md$/, '')
-    const title: string = matterResult.data.title
-    const date: string = matterResult.data.date
-    const postData: PostData = { id, title, date }
+export function getSortedPostSummaries(): PostSummary[] {
+  const allPostSummaries: PostSummary[] = getAllPostIds().map(path => {
+    const postSummary: PostSummary = getPostSummary(path.params.id)
 
-    return postData
+    return postSummary
   })
 
-  return allPostsData.sort((a, b) => {
+  const sortedPostSummaries = allPostSummaries.sort((a, b) => {
     if (a.date < b.date) {
       return 1
     } else if (a.date > b.date) {
@@ -37,9 +35,11 @@ export function getSortedPostsData(): PostData[] {
       return 0
     }
   })
+
+  return sortedPostSummaries
 }
 
-export function getAllPostIds() {
+export function getAllPostIds(): { params: { id: string }}[] {
   const fileNames: string[] = fs.readdirSync(postsDirectory)
 
   return fileNames.map(fileName => {
@@ -51,24 +51,34 @@ export function getAllPostIds() {
   })
 }
 
-export async function getPostData(id: string) {
-  const fullPath: string = path.join(postsDirectory, `${id}.md`)
-  const fileContents: string = fs.readFileSync(fullPath, 'utf8')
+export function getPostSummary(id: string): PostSummary {
+  const RawPost = loadRawPost(id)
 
-  const matterResult = matter(fileContents)
+  const title: string = RawPost.data.title
+  const date: string = RawPost.data.date
+  const postSummary: PostSummary = { id, title, date }
+
+  return postSummary
+}
+
+export async function getPost(id: string): Promise<Post> {
+  const RawPost = loadRawPost(id)
 
   const processedContent = await remark()
     .use(html)
-    .process(matterResult.content)
+    .process(RawPost.content)
   const contentHtml: string = processedContent.toString()
-  const title: string = matterResult.data.title
-  const date: string = matterResult.data.date
-  const postData: PostData = {
-    id,
-    contentHtml,
-    title,
-    date
-  }
+  const title: string = RawPost.data.title
+  const date: string = RawPost.data.date
+  const post: Post = { id, contentHtml, title, date }
 
-  return postData
+  return post
+}
+
+function loadRawPost(id: string): matter.GrayMatterFile<string> {
+  const fullPath: string = path.join(postsDirectory, `${id}.md`)
+  const fileContents: string = fs.readFileSync(fullPath, 'utf8')
+  const RawPost = matter(fileContents)
+
+  return RawPost
 }
