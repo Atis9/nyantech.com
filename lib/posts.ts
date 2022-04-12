@@ -22,14 +22,8 @@ export interface Post {
 export function getSortedPostSummaries(): PostSummary[] {
   const fileNames: string[] = fs.readdirSync(postsDirectory)
   const allPostSummaries: PostSummary[] = fileNames.map(fileName => {
-    const fullPath: string = path.join(postsDirectory, fileName)
-    const fileContents: string = fs.readFileSync(fullPath, 'utf-8')
-    const matterResult = matter(fileContents)
-
     const id: string = fileName.replace(/\.md$/, '')
-    const title: string = matterResult.data.title
-    const date: string = matterResult.data.date
-    const postSummary: PostSummary = { id, title, date }
+    const postSummary: PostSummary = getPostSummary(id)
 
     return postSummary
   })
@@ -59,7 +53,20 @@ export function getAllPostIds() {
   })
 }
 
-export async function getPost(id: string) {
+export function getPostSummary(id: string): PostSummary {
+  const fullPath: string = path.join(postsDirectory, `${id}.md`)
+  const fileContents: string = fs.readFileSync(fullPath, 'utf8')
+
+  const matterResult = matter(fileContents)
+
+  const title: string = matterResult.data.title
+  const date: string = matterResult.data.date
+  const postSummary: PostSummary = { id, title, date }
+
+  return postSummary
+}
+
+export async function getPost(id: string): Promise<Post> {
   const fullPath: string = path.join(postsDirectory, `${id}.md`)
   const fileContents: string = fs.readFileSync(fullPath, 'utf8')
 
