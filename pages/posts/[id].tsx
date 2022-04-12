@@ -15,7 +15,7 @@ export default function ShowPost({ post }: { post: Post }) {
         <div className={utilStyles.lightText}>
           <Date dateString={post.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.contentHtml ? post.contentHtml : '' }} />
+        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
       </article>
     </Layout>
   )
