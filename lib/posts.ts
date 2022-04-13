@@ -43,14 +43,15 @@ export function getSortedPostSummaries(): PostSummary[] {
 
 export function getAllPostIds(): { params: { id: string }}[] {
   const fileNames: string[] = fs.readdirSync(postsDirectory)
-
-  return fileNames.map(fileName => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, '')
-      }
-    }
+  const allPostIds: { params: { id: string }}[] = fileNames.map(fileName => {
+    const id = fileName.replace(/\.md$/, '')
+    return { params: { id: id }}
   })
+  const validAllPostIds: { params: { id: string }}[] = allPostIds.filter(obj => {
+    return validateId(obj.params.id)
+  })
+
+  return validAllPostIds
 }
 
 export function getPostSummary(id: string): PostSummary {
