@@ -1,8 +1,8 @@
-import Layout from '../../components/layout'
-import { getAllPostIds, getPost, Post } from '../../lib/posts'
-import Head from 'next/head'
-import Date from '../../components/date'
-import utilStyles from '../../styles/utils.module.css'
+import Layout from '../../components/layout';
+import { getAllPostIds, getPost, Post } from '../../lib/posts';
+import Head from 'next/head';
+import Date from '../../components/date';
+import utilStyles from '../../styles/utils.module.css';
 
 export default function showPost({ post }: { post: Post }) {
   return (
@@ -18,22 +18,22 @@ export default function showPost({ post }: { post: Post }) {
         <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
       </article>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticPaths() {
-  const paths = getAllPostIds()
+  const paths = getAllPostIds();
   return {
     paths,
-    fallback: false
-  }
+    fallback: false,
+  };
 }
 
 export async function getStaticProps({ params }: { params: { id: string } }) {
-  const post = await getPost(params.id)
+  const post = await getPost(params.id);
   return {
     props: {
-      post
-    }
-  }
+      post,
+    },
+  };
 }

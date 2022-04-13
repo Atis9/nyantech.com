@@ -1,20 +1,24 @@
-import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
-import { getSortedPostSummaries, PostSummary } from '../lib/posts'
-import Link from 'next/link'
-import Date from '../components/date'
+import Head from 'next/head';
+import Layout, { siteTitle } from '../components/layout';
+import utilStyles from '../styles/utils.module.css';
+import { getSortedPostSummaries, PostSummary } from '../lib/posts';
+import Link from 'next/link';
+import Date from '../components/date';
 
 export async function getStaticProps() {
-  const allPostSummaries = getSortedPostSummaries()
+  const allPostSummaries = getSortedPostSummaries();
   return {
     props: {
-      allPostSummaries
-    }
-  }
+      allPostSummaries,
+    },
+  };
 }
 
-export default function Home({ allPostSummaries }: { allPostSummaries: PostSummary[] }) {
+export default function Home({
+  allPostSummaries,
+}: {
+  allPostSummaries: PostSummary[];
+}) {
   return (
     <Layout home={true}>
       <Head>
@@ -24,7 +28,7 @@ export default function Home({ allPostSummaries }: { allPostSummaries: PostSumma
         <p>Code を書き Chord を鳴らし Cord を取り回す人</p>
         <p>
           (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
+          <a href='https://nextjs.org/learn'>our Next.js tutorial</a>.)
         </p>
       </section>
 
@@ -45,5 +49,5 @@ export default function Home({ allPostSummaries }: { allPostSummaries: PostSumma
         </ul>
       </section>
     </Layout>
-  )
+  );
 }
