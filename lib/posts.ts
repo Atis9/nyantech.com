@@ -79,7 +79,7 @@ export async function getPost(id: string): Promise<Post> {
 }
 
 function loadRawPost(id: string): matter.GrayMatterFile<string> {
-  if (validateId(id)) {
+  if (!validateId(id)) {
     throw new InvalidIdError
   }
 
@@ -91,7 +91,7 @@ function loadRawPost(id: string): matter.GrayMatterFile<string> {
 }
 
 function validateId(id: string): Boolean {
-  const validateRegExp: RegExp = /(\w|-)+\.md/
+  const validateRegExp: RegExp = /(\w|-)+/
   const validResult = validateRegExp.test(id)
 
   return validResult
