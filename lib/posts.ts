@@ -6,6 +6,8 @@ import html from 'remark-html'
 
 const postsDirectory: string = path.join(process.cwd(), 'posts')
 
+class InvalidIdError extends Error {}
+
 export interface PostSummary {
   id: string,
   title: string,
@@ -41,14 +43,15 @@ export function getSortedPostSummaries(): PostSummary[] {
 
 export function getAllPostIds(): { params: { id: string }}[] {
   const fileNames: string[] = fs.readdirSync(postsDirectory)
-
-  return fileNames.map(fileName => {
-    return {
-      params: {
-        id: fileName.replace(/\.md$/, '')
-      }
-    }
+  const allPostIds: { params: { id: string }}[] = fileNames.map(fileName => {
+    const id = fileName.replace(/\.md$/, '')
+    return { params: { id: id }}
   })
+  const validAllPostIds: { params: { id: string }}[] = allPostIds.filter(obj => {
+    return validateId(obj.params.id)
+  })
+
+  return validAllPostIds
 }
 
 export function getPostSummary(id: string): PostSummary {
@@ -76,9 +79,20 @@ export async function getPost(id: string): Promise<Post> {
 }
 
 function loadRawPost(id: string): matter.GrayMatterFile<string> {
+  if (!validateId(id)) {
+    throw new InvalidIdError
+  }
+
   const fullPath: string = path.join(postsDirectory, `${id}.md`)
   const fileContents: string = fs.readFileSync(fullPath, 'utf8')
   const RawPost = matter(fileContents)
 
   return RawPost
+}
+
+function validateId(id: string): Boolean {
+  const validateRegExp: RegExp = /(\w|-)+/
+  const validResult = validateRegExp.test(id)
+
+  return validResult
 }
