@@ -6,6 +6,8 @@ import html from 'remark-html'
 
 const postsDirectory: string = path.join(process.cwd(), 'posts')
 
+class InvalidIdError extends Error {}
+
 export interface PostSummary {
   id: string,
   title: string,
@@ -76,9 +78,20 @@ export async function getPost(id: string): Promise<Post> {
 }
 
 function loadRawPost(id: string): matter.GrayMatterFile<string> {
+  if (validateId(id)) {
+    throw new InvalidIdError
+  }
+
   const fullPath: string = path.join(postsDirectory, `${id}.md`)
   const fileContents: string = fs.readFileSync(fullPath, 'utf8')
   const RawPost = matter(fileContents)
 
   return RawPost
+}
+
+function validateId(id: string): Boolean {
+  const validateRegExp: RegExp = /(\w|-)+\.md/
+  const validResult = validateRegExp.test(id)
+
+  return validResult
 }
