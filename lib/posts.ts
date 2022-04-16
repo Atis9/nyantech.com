@@ -19,7 +19,7 @@ export interface Post {
   contentHtml: string;
 }
 
-function postsDirectory(): string {
+export function postsDirectory(): string {
   return path.join(process.cwd(), 'posts');
 }
 
