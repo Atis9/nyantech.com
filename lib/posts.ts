@@ -4,8 +4,6 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
-const postsDirectory: string = path.join(process.cwd(), 'posts');
-
 class InvalidIdError extends Error {}
 
 export interface PostSummary {
@@ -19,6 +17,10 @@ export interface Post {
   title: string;
   date: string;
   contentHtml: string;
+}
+
+function postsDirectory(): string {
+  return path.join(process.cwd(), 'posts');
 }
 
 export function getSortedPostSummaries(): PostSummary[] {
@@ -42,7 +44,7 @@ export function getSortedPostSummaries(): PostSummary[] {
 }
 
 export function getAllPostIds(): { params: { id: string } }[] {
-  const fileNames: string[] = fs.readdirSync(postsDirectory);
+  const fileNames: string[] = fs.readdirSync(postsDirectory());
   const allPostIds: { params: { id: string } }[] = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
     return { params: { id: id } };
@@ -83,7 +85,7 @@ function loadRawPost(id: string): matter.GrayMatterFile<string> {
     throw new InvalidIdError();
   }
 
-  const fullPath: string = path.join(postsDirectory, `${id}.md`);
+  const fullPath: string = path.join(postsDirectory(), `${id}.md`);
   const fileContents: string = fs.readFileSync(fullPath, 'utf8');
   const RawPost = matter(fileContents);
 
