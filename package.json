@@ -10,6 +10,7 @@
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'"
   },
   "dependencies": {
+    "@primer/css": "^19.8.2",
     "@types/highlight.js": "^10.1.0",
     "@types/marked": "^4.0.3",
     "date-fns": "^2.28.0",
