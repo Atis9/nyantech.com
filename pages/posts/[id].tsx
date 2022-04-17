@@ -2,7 +2,6 @@ import Layout from '../../components/layout';
 import { getAllPostIds, getPost, Post } from '../../lib/posts';
 import Head from 'next/head';
 import Date from '../../components/date';
-import utilStyles from '../../styles/utils.module.css';
 import 'highlight.js/styles/github.css';
 
 export default function showPost({ post }: { post: Post }) {
@@ -12,8 +11,8 @@ export default function showPost({ post }: { post: Post }) {
         <title>{post.title}</title>
       </Head>
       <article>
-        <h1 className={utilStyles.headingXl}>{post.title}</h1>
-        <div className={utilStyles.lightText}>
+        <h1>{post.title}</h1>
+        <div>
           <Date dateString={post.date} />
         </div>
         <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
