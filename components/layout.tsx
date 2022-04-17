@@ -1,12 +1,10 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from './layout.module.css';
-import utilStyles from '../styles/utils.module.css';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
 const name: string = 'Atis';
-export const siteTitle: string = 'Next.js Sample Website';
+export const siteTitle: string = 'Atis';
 
 export default function Layout({
   children,
@@ -16,7 +14,7 @@ export default function Layout({
   home: boolean;
 }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <link rel='icon' href='favicon.ico' />
         <meta
@@ -33,49 +31,44 @@ export default function Layout({
         <meta name='twitter:card' content='summary_large_image' />
       </Head>
 
-      <header className={styles.header}>
-        {home ? (
-          <>
-            <Image
-              priority
-              src='/images/profile.png'
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt={name}
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href='/'>
-              <a>
-                <Image
-                  priority
-                  src='/images/profile.png'
-                  className={utilStyles.borderCircle}
-                  height={108}
-                  width={108}
-                  alt={name}
-                />
-              </a>
+      <div className='container'>
+        <header className='Header'>
+          <div className='container-xl'>
+            <div className='d-flex flex-column flex-md-row flex-items-center flex-md-items-center'>
+              <div className='col-2 d-flex flex-items-center flex-items-center flex-md-items-start'>
+                <Link href='/' passHref>
+                  <Image
+                    priority
+                    src='/images/profile.png'
+                    height={128}
+                    width={128}
+                    alt={name}
+                  />
+                </Link>
+              </div>
+              <div className='col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-4'>
+                <h1 className='text-normal lh-condensed'>{name}</h1>
+                <p className='h4 text-normal mb-2'>
+                  Code を書き Chord を鳴らし Cord を取り回す人
+                </p>
+                <a className='text-small' href='#url'>
+                  https://github.com/Atis9
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className='container-md'>
+          <main>{children}</main>
+          {!home && (
+            <Link href='/' passHref>
+              <button className='btn btn-outline'>
+                <span>← Back to home</span>
+              </button>
             </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href='/'>
-                <a className={utilStyles.colorInherit}>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div className={styles.backToHome}>
-          <Link href='/'>
-            <a>← Back to home</a>
-          </Link>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
