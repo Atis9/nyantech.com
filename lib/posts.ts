@@ -1,8 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { remark } from 'remark';
-import html from 'remark-html';
+import { marked } from 'marked';
+import hljs from 'highlight.js';
 
 const postsDirectory: string = path.join(process.cwd(), 'posts');
 
@@ -69,7 +69,7 @@ export function getPostSummary(id: string): PostSummary {
 export async function getPost(id: string): Promise<Post> {
   const RawPost = loadRawPost(id);
 
-  const processedContent = await remark().use(html).process(RawPost.content);
+  const processedContent = parseMarkdownToHtml(RawPost.content);
   const contentHtml: string = processedContent.toString();
   const title: string = RawPost.data.title;
   const date: string = RawPost.data.date;
@@ -95,4 +95,21 @@ function validateId(id: string): Boolean {
   const validResult = validateRegExp.test(id);
 
   return validResult;
+}
+
+function parseMarkdownToHtml(markdown: string): string {
+  marked.setOptions({
+    highlight: (code, lang) => {
+      return hljs.highlightAuto(code, [lang]).value;
+    },
+    pedantic: false,
+    gfm: true,
+    breaks: true,
+    sanitize: true,
+    silent: false,
+  });
+
+  const html = marked(markdown);
+
+  return html;
 }
