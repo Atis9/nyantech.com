@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Image from 'next/image';
-import styles from './layout.module.css';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
@@ -15,7 +14,7 @@ export default function Layout({
   home: boolean;
 }) {
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
         <link rel='icon' href='favicon.ico' />
         <meta
@@ -32,7 +31,7 @@ export default function Layout({
         <meta name='twitter:card' content='summary_large_image' />
       </Head>
 
-      <header className={styles.header}>
+      <header>
         {home ? (
           <>
             <Image
@@ -68,7 +67,7 @@ export default function Layout({
       </header>
       <main>{children}</main>
       {!home && (
-        <div className={styles.backToHome}>
+        <div>
           <Link href='/'>
             <a>← Back to home</a>
           </Link>
