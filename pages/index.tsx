@@ -23,26 +23,23 @@ export default function Home({
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section>
-        <p>Code を書き Chord を鳴らし Cord を取り回す人</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href='https://nextjs.org/learn'>our Next.js tutorial</a>.)
-        </p>
-      </section>
 
       <section>
-        <h2>Blog</h2>
-        <ul>
+        <h1>Blog</h1>
+        <ul className='ActionList'>
           {allPostSummaries.map(({ id, date, title }) => (
-            <li key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
+            <li className='ActionList-item p-2' key={id}>
+              <Link href={`/posts/${id}`} passHref>
+                <div className='ActionList-content'>
+                  <div className='ActionList-item-label'>
+                    <span className='color-fg-muted'>
+                      <Date dateString={date} />
+                    </span>
+                    <span> </span>
+                    <strong>{title}</strong>
+                  </div>
+                </div>
               </Link>
-              <br />
-              <small>
-                <Date dateString={date} />
-              </small>
             </li>
           ))}
         </ul>

@@ -15,7 +15,10 @@ export default function showPost({ post }: { post: Post }) {
         <div>
           <Date dateString={post.date} />
         </div>
-        <div dangerouslySetInnerHTML={{ __html: post.contentHtml }} />
+        <div
+          className='markdown-body my-3'
+          dangerouslySetInnerHTML={{ __html: post.contentHtml }}
+        />
       </article>
     </Layout>
   );

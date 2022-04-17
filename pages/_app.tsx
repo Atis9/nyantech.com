@@ -1,5 +1,5 @@
 import { AppProps } from 'next/app';
-import '@primer/css/index.scss'
+import '@primer/css/index.scss';
 
 function MyApp({ Component, pageProps }: AppProps) {
   return <Component {...pageProps} />;

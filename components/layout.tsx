@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { ReactNode } from 'react';
 
 const name: string = 'Atis';
-export const siteTitle: string = 'Next.js Sample Website';
+export const siteTitle: string = 'Atis';
 
 export default function Layout({
   children,
@@ -31,48 +31,44 @@ export default function Layout({
         <meta name='twitter:card' content='summary_large_image' />
       </Head>
 
-      <header>
-        {home ? (
-          <>
-            <Image
-              priority
-              src='/images/profile.png'
-              height={144}
-              width={144}
-              alt={name}
-            />
-            <h1>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href='/'>
-              <a>
-                <Image
-                  priority
-                  src='/images/profile.png'
-
-                  height={108}
-                  width={108}
-                  alt={name}
-                />
-              </a>
+      <div className='container'>
+        <header className='Header'>
+          <div className='container-xl'>
+            <div className='d-flex flex-column flex-md-row flex-items-center flex-md-items-center'>
+              <div className='col-2 d-flex flex-items-center flex-items-center flex-md-items-start'>
+                <Link href='/' passHref>
+                  <Image
+                    priority
+                    src='/images/profile.png'
+                    height={128}
+                    width={128}
+                    alt={name}
+                  />
+                </Link>
+              </div>
+              <div className='col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-4'>
+                <h1 className='text-normal lh-condensed'>{name}</h1>
+                <p className='h4 text-normal mb-2'>
+                  Code を書き Chord を鳴らし Cord を取り回す人
+                </p>
+                <a className='text-small' href='#url'>
+                  https://github.com/Atis9
+                </a>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className='container-md'>
+          <main>{children}</main>
+          {!home && (
+            <Link href='/' passHref>
+              <button className='btn btn-outline'>
+                <span>← Back to home</span>
+              </button>
             </Link>
-            <h2>
-              <Link href='/'>
-                <a>{name}</a>
-              </Link>
-            </h2>
-          </>
-        )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div>
-          <Link href='/'>
-            <a>← Back to home</a>
-          </Link>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
