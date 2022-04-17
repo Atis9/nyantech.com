@@ -3,6 +3,7 @@ import { getAllPostIds, getPost, Post } from '../../lib/posts';
 import Head from 'next/head';
 import Date from '../../components/date';
 import utilStyles from '../../styles/utils.module.css';
+import 'highlight.js/styles/github.css';
 
 export default function showPost({ post }: { post: Post }) {
   return (
