@@ -63,7 +63,7 @@ export default function Layout({
               <p className='h4 text-normal mb-2'>
                 Code を書き Chord を鳴らし Cord を取り回す人
               </p>
-              <a className='text-small' href='#url'>
+              <a className='text-small' href='https://github.com/Atis9'>
                 https://github.com/Atis9
               </a>
             </div>
