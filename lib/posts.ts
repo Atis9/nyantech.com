@@ -111,7 +111,7 @@ function parseMarkdownToHtml(markdown: string): string {
 
   const html = sanitizeHtml(marked(markdown), {
     allowedClasses: {
-      code: ['language-*', 'lang-*'],
+      code: ['language-*', 'lang-*', 'nohighlight'],
       '*': ['hljs-*'],
     },
   });
