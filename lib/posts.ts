@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
+import sanitizeHtml from 'sanitize-html';
 
 const postsDirectory: string = path.join(process.cwd(), 'posts');
 
@@ -108,7 +109,7 @@ function parseMarkdownToHtml(markdown: string): string {
     silent: false,
   });
 
-  const html = marked(markdown);
+  const html = sanitizeHtml(marked(markdown));
 
   return html;
 }
