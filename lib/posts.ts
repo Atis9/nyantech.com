@@ -105,7 +105,6 @@ function parseMarkdownToHtml(markdown: string): string {
     pedantic: false,
     gfm: true,
     breaks: true,
-    sanitize: true,
     silent: false,
   });
 
