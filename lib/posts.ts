@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { marked } from 'marked';
 import hljs from 'highlight.js';
+import sanitizeHtml from 'sanitize-html';
 
 const postsDirectory: string = path.join(process.cwd(), 'posts');
 
@@ -105,11 +106,15 @@ function parseMarkdownToHtml(markdown: string): string {
     pedantic: false,
     gfm: true,
     breaks: true,
-    sanitize: true,
     silent: false,
   });
 
-  const html = marked(markdown);
+  const html = sanitizeHtml(marked(markdown), {
+    allowedClasses: {
+      code: ['language-*', 'lang-*', 'nohighlight'],
+      '*': ['hljs-*'],
+    },
+  });
 
   return html;
 }
