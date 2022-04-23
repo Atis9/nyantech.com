@@ -17,10 +17,7 @@ export default function Layout({
     <div>
       <Head>
         <link rel='icon' href='favicon.ico' />
-        <meta
-          name='description'
-          content='Nyantech'
-        />
+        <meta name='description' content='Nyantech' />
         <meta name='og:title' content={siteTitle} />
         <meta name='twitter:card' content='summary_large_image' />
       </Head>
