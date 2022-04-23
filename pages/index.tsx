@@ -28,8 +28,8 @@ export default function Home({
         <h1>Blog</h1>
         <ul className='ActionList'>
           {allPostSummaries.map(({ id, date, title }) => (
-            <li className='ActionList-item p-2' key={id}>
-              <Link href={`/posts/${id}`} passHref>
+            <Link href={`/posts/${id}`} passHref key={id}>
+              <li className='ActionList-item p-2'>
                 <div className='ActionList-content'>
                   <div className='ActionList-item-label'>
                     <span className='color-fg-muted'>
@@ -39,8 +39,8 @@ export default function Home({
                     <strong>{title}</strong>
                   </div>
                 </div>
-              </Link>
-            </li>
+              </li>
+            </Link>
           ))}
         </ul>
       </section>
