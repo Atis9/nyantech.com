@@ -109,7 +109,9 @@ function parseMarkdownToHtml(markdown: string): string {
     silent: false,
   });
 
-  const html = sanitizeHtml(marked(markdown));
+  const html = sanitizeHtml(marked(markdown), {
+    allowedClasses: { '*': ['*'] },
+  });
 
   return html;
 }
