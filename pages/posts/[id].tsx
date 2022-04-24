@@ -1,4 +1,4 @@
-import Layout from '../../components/layout';
+import Layout, { siteTitle } from '../../components/layout';
 import { getAllPostIds, getPost, Post } from '../../lib/posts';
 import Head from 'next/head';
 import Date from '../../components/date';
@@ -8,7 +8,7 @@ export default function showPost({ post }: { post: Post }) {
   return (
     <Layout home={false}>
       <Head>
-        <title>{post.title}</title>
+        <title>{post.title} - {siteTitle}</title>
         <meta name='og:description' content={post.title} />
       </Head>
       <article>
