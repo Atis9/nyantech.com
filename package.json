@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json,css}'"
+    "lint": "next lint"
   },
   "dependencies": {
     "@primer/css": "^19.8.2",
@@ -30,8 +29,6 @@
     "@types/sanitize-html": "^2.6.2",
     "eslint": "8.12.0",
     "eslint-config-next": "12.1.4",
-    "eslint-config-prettier": "^8.5.0",
-    "prettier": "^2.6.2",
     "typescript": "^4.6.3"
   }
 }
