@@ -8,7 +8,9 @@ export default function showPost({ post }: { post: Post }) {
   return (
     <Layout home={false}>
       <Head>
-        <title>{post.title} - {siteTitle}</title>
+        <title>
+          {post.title} - {siteTitle}
+        </title>
         <meta name='og:description' content={post.title} />
       </Head>
       <article>
