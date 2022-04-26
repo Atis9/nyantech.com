@@ -16,7 +16,7 @@ export default function Layout({
   return (
     <div>
       <Head>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/nyantech_logo.svg' type='image/svg+xml' />
         <meta name='description' content='Nyantech' />
         <meta name='og:title' content={siteTitle} />
         <meta name='twitter:card' content='summary_large_image' />
@@ -31,7 +31,7 @@ export default function Layout({
                   <span className='mr-2'>
                     <Image
                       priority
-                      src='/images/logo.png'
+                      src='/nyantech_logo.svg'
                       height={32}
                       width={32}
                       alt={name}
