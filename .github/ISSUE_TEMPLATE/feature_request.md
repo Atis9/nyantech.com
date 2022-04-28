@@ -2,7 +2,7 @@
 name: 機能リクエスト
 about: このプロジェクトにアイデアを提案する
 title: ''
-labels: ''
+labels: 'enhancement'
 assignees: ''
 
 ---
