@@ -12,6 +12,7 @@ assignees: ''
 
 **再現するために**
 動作を再現するための手順:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
@@ -24,15 +25,17 @@ assignees: ''
 該当する場合は、問題を説明するためにスクリーンショットを追加してください。
 
 **デスクトップ (以下の項目を入力してください):**
- - OS: [e.g. iOS]
- - Browser [e.g. chrome, safari]
- - Version [e.g. 22]
+
+- OS: [e.g. iOS]
+- Browser [e.g. chrome, safari]
+- Version [e.g. 22]
 
 **スマートフォン (以下の項目を入力してください):**
- - Device: [e.g. iPhone6]
- - OS: [e.g. iOS8.1]
- - Browser [e.g. stock browser, safari]
- - Version [e.g. 22]
+
+- Device: [e.g. iPhone6]
+- OS: [e.g. iOS8.1]
+- Browser [e.g. stock browser, safari]
+- Version [e.g. 22]
 
 **補足説明**
 その他、問題についての背景があれば、ここに追加してください。
