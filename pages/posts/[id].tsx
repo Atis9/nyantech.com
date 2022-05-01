@@ -26,8 +26,8 @@ export default function showPost({ post }: { post: Post }) {
               alt={post.author}
             />
             <div className='col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-3'>
-              <div className='Box-title'>{name}</div>
-              <div><Date dateString={post.date} /></div>
+              <div className='Box-title'>{post.author}</div>
+              <div className='color-fg-muted'><Date dateString={post.date} /></div>
             </div>
           </div>
           <div
