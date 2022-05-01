@@ -49,7 +49,7 @@ export default function Layout({
             <div className='col-2 d-flex flex-items-center flex-items-center flex-md-items-start'>
               <Image
                 priority
-                src='/images/profile.png'
+                src='/images/Atis.png'
                 height={128}
                 width={128}
                 alt={name}

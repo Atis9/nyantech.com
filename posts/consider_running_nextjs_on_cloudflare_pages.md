@@ -1,6 +1,7 @@
 ---
 title: 'Next.js を Cloudflare Pages で運用することを検討する'
 date: '2022-05-01 16:15'
+author: 'Atis'
 ---
 
 ### SSR が利用できるか

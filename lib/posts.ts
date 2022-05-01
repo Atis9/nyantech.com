@@ -13,12 +13,14 @@ export interface PostSummary {
   id: string;
   title: string;
   date: string;
+  author: string;
 }
 
 export interface Post {
   id: string;
   title: string;
   date: string;
+  author: string;
   contentHtml: string;
 }
 
@@ -62,7 +64,8 @@ export function getPostSummary(id: string): PostSummary {
 
   const title: string = RawPost.data.title;
   const date: string = RawPost.data.date;
-  const postSummary: PostSummary = { id, title, date };
+  const author: string = RawPost.data.author;
+  const postSummary: PostSummary = { id, title, date, author };
 
   return postSummary;
 }
@@ -74,7 +77,8 @@ export async function getPost(id: string): Promise<Post> {
   const contentHtml: string = processedContent.toString();
   const title: string = RawPost.data.title;
   const date: string = RawPost.data.date;
-  const post: Post = { id, contentHtml, title, date };
+  const author: string = RawPost.data.author;
+  const post: Post = { id, contentHtml, title, date, author };
 
   return post;
 }

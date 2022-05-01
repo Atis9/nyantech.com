@@ -20,12 +20,12 @@ export default function showPost({ post }: { post: Post }) {
           <div className='Box-header d-flex flex-column flex-md-row flex-items-center flex-md-items-center'>
             <Image
               priority
-              src='/images/profile.png'
-              height={32}
-              width={32}
-              alt={name}
+              src={`/images/${post.author}.png`}
+              height={48}
+              width={48}
+              alt={post.author}
             />
-            <div className='col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start'>
+            <div className='col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-3'>
               <div className='Box-title'>{name}</div>
               <div><Date dateString={post.date} /></div>
             </div>
