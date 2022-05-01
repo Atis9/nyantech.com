@@ -26,20 +26,22 @@ export default function Home({
 
       <h1>Blog</h1>
       <div className='Box my-3'>
-        <div className='Box-header'>
-          <div>Title</div>
-          <div>Author</div>
-          <div>Date</div>
+        <div className='Box-header d-flex'>
+          <div className='flex-1'>Title</div>
+          <div className='flex-1'>Author</div>
+          <div className='flex-1'>Date</div>
         </div>
         {allPostSummaries.map(({ id, date, title, author }) => (
-          <div className='Box-row Box-row--hover-gray' key={id}>
-            <div className='Box-row-link'>
+          <div className='Box-row Box-row--hover-gray d-flex' key={id}>
+            <div className='Box-row-link flex-1'>
               <Link href={`/posts/${id}`} passHref>
                 <a><strong>{title}</strong></a>
               </Link>
             </div>
-            <strong>{author}</strong>
-            <div className='color-fg-muted'>
+            <div className='flex-1'>
+              <strong>{author}</strong>
+            </div>
+            <div className='color-fg-muted flex-1'>
               <Date dateString={date} />
             </div>
           </div>
