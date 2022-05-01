@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-const name: string = 'Atis';
+export const name: string = 'Atis';
 export const siteTitle: string = 'Nyantech';
 
 export default function Layout({
