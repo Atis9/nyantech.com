@@ -24,26 +24,24 @@ export default function Home({
         <title>{siteTitle}</title>
       </Head>
 
-      <section>
-        <h1>Blog</h1>
-        <ul className='ActionList'>
-          {allPostSummaries.map(({ id, date, title }) => (
+      <h1>Blog</h1>
+      <div className='Box my-3'>
+        <ul>
+          {allPostSummaries.map(({ id, date, title, author }) => (
             <Link href={`/posts/${id}`} passHref key={id}>
-              <li className='ActionList-item p-2'>
-                <div className='ActionList-content'>
-                  <div className='ActionList-item-label'>
-                    <span className='color-fg-muted'>
-                      <Date dateString={date} />
-                    </span>
-                    <span> </span>
-                    <strong>{title}</strong>
-                  </div>
+              <li className='Box-row Box-row--hover-gray'>
+                <div className='Box-row-link'>
+                  <strong>{title}</strong>
+                </div>
+                <div>{author}</div>
+                <div className='color-fg-muted'>
+                  <Date dateString={date} />
                 </div>
               </li>
             </Link>
           ))}
         </ul>
-      </section>
+      </div>
     </Layout>
   );
 }
