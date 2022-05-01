@@ -28,17 +28,17 @@ export default function Home({
       <div className='Box my-3'>
         <ul>
           {allPostSummaries.map(({ id, date, title, author }) => (
-            <Link href={`/posts/${id}`} passHref key={id}>
-              <li className='Box-row Box-row--hover-gray'>
-                <div className='Box-row-link'>
-                  <strong>{title}</strong>
-                </div>
-                <div>{author}</div>
-                <div className='color-fg-muted'>
-                  <Date dateString={date} />
-                </div>
-              </li>
-            </Link>
+            <li className='Box-row Box-row--hover-gray' key={id}>
+              <div className='Box-row-link'>
+                <Link href={`/posts/${id}`} passHref>
+                  <a><strong>{title}</strong></a>
+                </Link>
+              </div>
+              <div>{author}</div>
+              <div className='color-fg-muted'>
+                <Date dateString={date} />
+              </div>
+            </li>
           ))}
         </ul>
       </div>
