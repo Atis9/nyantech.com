@@ -1,6 +1,7 @@
 ---
 title: 'ブログを作成した'
 date: '2022-04-23 23:00'
+author: 'Atis'
 ---
 
 [Next.js のチュートリアル](https://nextjs.org/learn/basics/create-nextjs-app) から派生してブログを作りました。

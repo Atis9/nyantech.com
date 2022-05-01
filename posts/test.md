@@ -1,6 +1,7 @@
 ---
 title: 'Test'
 date: '2022-04-08 00:00'
+author: 'Atis'
 ---
 
 特に内容はなし

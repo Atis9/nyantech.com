@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
-const name: string = 'Atis';
+export const name: string = 'Atis';
 export const siteTitle: string = 'Nyantech';
 
 export default function Layout({
@@ -49,7 +49,7 @@ export default function Layout({
             <div className='col-2 d-flex flex-items-center flex-items-center flex-md-items-start'>
               <Image
                 priority
-                src='/images/profile.png'
+                src='/images/Atis.png'
                 height={128}
                 width={128}
                 alt={name}
