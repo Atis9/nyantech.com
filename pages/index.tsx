@@ -26,21 +26,24 @@ export default function Home({
 
       <h1>Blog</h1>
       <div className='Box my-3'>
-        <ul>
-          {allPostSummaries.map(({ id, date, title, author }) => (
-            <li className='Box-row Box-row--hover-gray' key={id}>
-              <div className='Box-row-link'>
-                <Link href={`/posts/${id}`} passHref>
-                  <a><strong>{title}</strong></a>
-                </Link>
-              </div>
-              <div>{author}</div>
-              <div className='color-fg-muted'>
-                <Date dateString={date} />
-              </div>
-            </li>
-          ))}
-        </ul>
+        <div className='Box-header'>
+          <div>Title</div>
+          <div>Author</div>
+          <div>Date</div>
+        </div>
+        {allPostSummaries.map(({ id, date, title, author }) => (
+          <div className='Box-row Box-row--hover-gray' key={id}>
+            <div className='Box-row-link'>
+              <Link href={`/posts/${id}`} passHref>
+                <a><strong>{title}</strong></a>
+              </Link>
+            </div>
+            <strong>{author}</strong>
+            <div className='color-fg-muted'>
+              <Date dateString={date} />
+            </div>
+          </div>
+        ))}
       </div>
     </Layout>
   );
