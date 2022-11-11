@@ -1,6 +1,6 @@
 ---
 title: 'Pixel 7 における Dual eSIM の DSDS について'
-date: '2022-11-11 9:21'
+date: '2022-11-11 09:21'
 author: 'Atis'
 ---
 
