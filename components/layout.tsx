@@ -63,8 +63,8 @@ export default function Layout({
               <a className='text-small' href='https://github.com/Atis9'>
                 https://github.com/Atis9
               </a>
-              <a className='text-small' rel="me" href="https://social.nyantech.com/@Atis">
-                https://social.nyantech.com/@Atis
+              <a className='text-small' rel="me" href="https://atis.social/@atis">
+                https://atis.social/@atis
               </a>
             </div>
           </div>
