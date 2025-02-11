@@ -14,31 +14,30 @@ export default function Layout({
   home: boolean;
 }) {
   return (
-    <div>
+    (<div>
       <Head>
         <link rel='icon' href='/nyantech_logo.svg' type='image/svg+xml' />
         <meta name='description' content='Nyantech' />
         <meta name='og:title' content={siteTitle} />
         <meta name='twitter:card' content='summary_large_image' />
       </Head>
-
       <div className='container'>
         <header className='Header'>
           <div className='container-xl'>
             <div className='Header-item'>
-              <Link href='/' passHref>
-                <a className='Header-link f4 d-flex flex-items-center'>
-                  <span className='mr-2'>
-                    <Image
-                      priority
-                      src='/nyantech_logo.svg'
-                      height={32}
-                      width={32}
-                      alt={name}
-                    />
-                  </span>
-                  <span>Nyantech</span>
-                </a>
+              <Link href='/' passHref className='Header-link f4 d-flex flex-items-center'>
+
+                <span className='mr-2'>
+                  <Image
+                    priority
+                    src='/nyantech_logo.svg'
+                    height={32}
+                    width={32}
+                    alt={name}
+                  />
+                </span>
+                <span>Nyantech</span>
+
               </Link>
             </div>
           </div>
@@ -71,7 +70,7 @@ export default function Layout({
 
           <main>{children}</main>
           {!home && (
-            <Link href='/' passHref>
+            <Link href='/' passHref legacyBehavior>
               <button className='btn btn-outline'>
                 <span>← Back to home</span>
               </button>
@@ -79,6 +78,6 @@ export default function Layout({
           )}
         </div>
       </div>
-    </div>
+    </div>)
   );
 }
