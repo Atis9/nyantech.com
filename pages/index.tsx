@@ -19,11 +19,10 @@ export default function Home({
   allPostSummaries: PostSummary[];
 }) {
   return (
-    <Layout home={true}>
+    (<Layout home={true}>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-
       <h1>Blog</h1>
       <div className='Box my-3'>
         <div className='Box-header d-flex'>
@@ -37,7 +36,7 @@ export default function Home({
           <div className='Box-row Box-row--hover-gray d-flex' key={id}>
             <div className='Box-row-link flex-1 px-2'>
               <Link href={`/posts/${id}`} passHref>
-                <a><strong>{title}</strong></a>
+                <strong>{title}</strong>
               </Link>
             </div>
             <div className='flex-1 d-flex'>
@@ -51,6 +50,6 @@ export default function Home({
           </div>
         ))}
       </div>
-    </Layout>
+    </Layout>)
   );
 }
