@@ -45,7 +45,7 @@ export default function Layout({
 
         <div className='container-md p-4'>
           <div className='d-flex flex-column flex-md-row flex-items-center flex-md-items-center border rounded-3 p-2 mb-2'>
-            <div className='col-2 d-flex flex-items-center flex-items-center flex-md-items-start'>
+            <div className='d-flex flex-items-center flex-items-center flex-md-items-start'>
               <Image
                 priority
                 src='/images/Atis.png'
