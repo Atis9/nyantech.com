@@ -12,7 +12,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@primer/css": "^19.8.2",
+    "@primer/css": "^21.4.0",
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
