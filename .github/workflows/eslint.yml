@@ -27,12 +27,12 @@ jobs:
       security-events: write
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
 
       - name: Install ESLint
         run: |
-          npm install eslint@8.10.0
-          npm install @microsoft/eslint-formatter-sarif@2.1.7
+          npm install eslint@9.37.0
+          npm install @microsoft/eslint-formatter-sarif@3.1.0
 
       - name: Run ESLint
         run: npx eslint .
@@ -43,7 +43,7 @@ jobs:
         continue-on-error: true
 
       - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v2
+        uses: github/codeql-action/upload-sarif@2a2dd30f8030072d379eb0c9ea51789aa2ea9ca4 # v3.29.5
         with:
           sarif_file: eslint-results.sarif
           wait-for-processing: true
