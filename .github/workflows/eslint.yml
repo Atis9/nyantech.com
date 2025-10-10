@@ -15,8 +15,6 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ main ]
-  schedule:
-    - cron: '24 0 * * 4'
 
 jobs:
   eslint:
@@ -24,26 +22,18 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      security-events: write
     steps:
       - name: Checkout code
         uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
 
-      - name: Install ESLint
-        run: |
-          npm install eslint@9.37.0
-          npm install @microsoft/eslint-formatter-sarif@3.1.0
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile --production=false
 
       - name: Run ESLint
-        run: npx eslint .
-          --config .eslintrc.json
-          --ext .js,.jsx,.ts,.tsx
-          --format @microsoft/eslint-formatter-sarif
-          --output-file eslint-results.sarif
-        continue-on-error: true
-
-      - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@2a2dd30f8030072d379eb0c9ea51789aa2ea9ca4 # v3.29.5
-        with:
-          sarif_file: eslint-results.sarif
-          wait-for-processing: true
+        run: yarn lint
