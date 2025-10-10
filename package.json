@@ -19,7 +19,7 @@
     "react-dom": "^19.0.0",
     "remark-html": "^15.0.1",
     "sanitize-html": "^2.12.1",
-    "sass": "^1.50.0"
+    "sass": "^1.93.2"
   },
   "devDependencies": {
     "@types/marked": "^4.0.3",
