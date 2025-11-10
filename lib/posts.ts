@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
-import { marked } from 'marked';
+import { Marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
 import sanitizeHtml from 'sanitize-html';
 
@@ -73,7 +74,7 @@ export function getPostSummary(id: string): PostSummary {
 export async function getPost(id: string): Promise<Post> {
   const RawPost = loadRawPost(id);
 
-  const processedContent = parseMarkdownToHtml(RawPost.content);
+  const processedContent = await parseMarkdownToHtml(RawPost.content);
   const contentHtml: string = processedContent.toString();
   const title: string = RawPost.data.title;
   const date: string = RawPost.data.date;
@@ -102,18 +103,24 @@ function validateId(id: string): Boolean {
   return validResult;
 }
 
-function parseMarkdownToHtml(markdown: string): string {
-  marked.setOptions({
-    highlight: (code, lang) => {
-      return hljs.highlightAuto(code, [lang]).value;
-    },
+async function parseMarkdownToHtml(markdown: string): Promise<string> {
+  const marked = new Marked(
+    markedHighlight({
+      langPrefix: 'hljs language-',
+      highlight(code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language }).value;
+      },
+    }),
+  );
+  marked.use({
     pedantic: false,
     gfm: true,
     breaks: true,
     silent: false,
   });
 
-  const html = sanitizeHtml(marked(markdown), {
+  const html = sanitizeHtml(await marked.parse(markdown), {
     allowedClasses: {
       code: ['language-*', 'lang-*', 'nohighlight'],
       '*': ['hljs-*'],
