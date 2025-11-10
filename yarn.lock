@@ -2862,10 +2862,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-marked@^4.0.14:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-4.3.0.tgz#796362821b019f734054582038b116481b456cf3"
-  integrity sha512-PRsaiG84bK+AMvxziE/lCFss8juXjNaWzVbN5tXAm4XjeaS9NAHhop+PjQxz2A9h8Q4M/xGmzP8vqNwy6JeK0A==
+marked@^17.0.0:
+  version "17.0.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-17.0.0.tgz#62ae3f2ea8346025ae24a24ad4b78982655ef4e3"
+  integrity sha512-KkDYEWEEiYJw/KC+DVm1zzlpMQSMIu6YRltkcCvwheCp8HWPXCk9JwOmHJKBlGfzcpzcIt6x3sMnTsRm/51oDg==
 
 math-intrinsics@^1.0.0:
   version "1.0.0"
