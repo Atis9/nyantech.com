@@ -75,7 +75,7 @@ export async function getPost(id: string): Promise<Post> {
   const RawPost = loadRawPost(id);
 
   const processedContent = await parseMarkdownToHtml(RawPost.content);
-  const contentHtml: string = processedContent.toString();
+  const contentHtml: string = processedContent;
   const title: string = RawPost.data.title;
   const date: string = RawPost.data.date;
   const author: string = RawPost.data.author;
