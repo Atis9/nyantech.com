@@ -4,47 +4,47 @@ import next from 'eslint-config-next';
 
 export default [
   {
-    ignores: [".next/"],
+    ignores: ['.next/'],
   },
   ...next,
   {
     rules: {
-      "semi": [
-        "error",
-        "always"
+      'semi': [
+        'error',
+        'always'
       ],
-      "semi-spacing": [
-        "error",
+      'semi-spacing': [
+        'error',
         {
-          "after": true,
-          "before": false
+          'after': true,
+          'before': false
         }
       ],
-      "semi-style": [
-        "error",
-        "last"
+      'semi-style': [
+        'error',
+        'last'
       ],
-      "no-extra-semi": "error",
-      "no-unexpected-multiline": "error",
-      "no-unreachable": "error",
-      "indent": [
-        "error",
+      'no-extra-semi': 'error',
+      'no-unexpected-multiline': 'error',
+      'no-unreachable': 'error',
+      'indent': [
+        'error',
         2
       ],
-      "quotes": [
-        "error",
-        "single"
+      'quotes': [
+        'error',
+        'single'
       ],
-      "linebreak-style": [
-        "error",
-        "unix"
+      'linebreak-style': [
+        'error',
+        'unix'
       ],
-      "no-console": [
-        "warn",
+      'no-console': [
+        'warn',
         {
-          "allow": [
-            "warn",
-            "error"
+          'allow': [
+            'warn',
+            'error'
           ]
         }
       ]
