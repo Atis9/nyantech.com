@@ -16,7 +16,8 @@
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
-    "marked": "^4.0.14",
+    "marked": "^17.0.0",
+    "marked-highlight": "^2.2.3",
     "next": "16",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -27,7 +28,6 @@
   "devDependencies": {
     "@microsoft/eslint-formatter-sarif": "^3.1.0",
     "@types/eslint": "^9.6.1",
-    "@types/marked": "^4.0.3",
     "@types/node": "^22.0.0",
     "@types/react": "^19.2.2",
     "@types/sanitize-html": "^2.16.0",
