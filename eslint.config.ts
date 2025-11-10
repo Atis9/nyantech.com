@@ -4,7 +4,7 @@ import next from 'eslint-config-next';
 
 export default [
   {
-    ignores: [".next/", "eslint.config.ts"],
+    ignores: [".next/"],
   },
   ...next,
   {
