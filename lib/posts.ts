@@ -27,7 +27,7 @@ export interface Post {
 
 export function getSortedPostSummaries(): PostSummary[] {
   const allPostSummaries: PostSummary[] = getAllPostIds().map((path) => {
-    const postSummary: PostSummary = getPostSummary(path.params.id);
+    const postSummary: PostSummary = getPostSummary(path.id);
 
     return postSummary;
   });
@@ -45,15 +45,15 @@ export function getSortedPostSummaries(): PostSummary[] {
   return sortedPostSummaries;
 }
 
-export function getAllPostIds(): { params: { id: string } }[] {
+export function getAllPostIds(): { id: string }[] {
   const fileNames: string[] = fs.readdirSync(postsDirectory);
-  const allPostIds: { params: { id: string } }[] = fileNames.map((fileName) => {
+  const allPostIds: { id: string }[] = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
-    return { params: { id: id } };
+    return { id: id };
   });
-  const validAllPostIds: { params: { id: string } }[] = allPostIds.filter(
+  const validAllPostIds: { id: string }[] = allPostIds.filter(
     (obj) => {
-      return validateId(obj.params.id);
+      return validateId(obj.id);
     },
   );
 
