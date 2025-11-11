@@ -65,7 +65,7 @@ export default function Layout({
 
           <main>{children}</main>
           {!home && (
-            <Link href='/' legacyBehavior={false}>
+            <Link href='/'>
               <button className='btn btn-outline'>
                 <span>← Back to home</span>
               </button>
