@@ -49,7 +49,7 @@ export function getAllPostIds(): { id: string }[] {
   const fileNames: string[] = fs.readdirSync(postsDirectory);
   const allPostIds: { id: string }[] = fileNames.map((fileName) => {
     const id = fileName.replace(/\.md$/, '');
-    return { id: id };
+    return { id };
   });
   const validAllPostIds: { id: string }[] = allPostIds.filter(
     (obj) => {
