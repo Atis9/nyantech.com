@@ -1,13 +1,13 @@
 import Link from 'next/link';
 import Date from '../components/date';
 import { getSortedPostSummaries, PostSummary } from '../lib/posts';
-import Layout from '../components/layout'; // LayoutコンポーネントはApp Routerでも使用可能
+import Layout from '../components/layout';
 
 export default async function Home() {
   const allPostSummaries: PostSummary[] = getSortedPostSummaries();
 
   return (
-    <Layout home={true}> {/* Layoutコンポーネントはそのまま使用 */}
+    <Layout home={true}>
       <h1>Blog</h1>
       <div className='Box my-3'>
         <div className='Box-header d-flex'>

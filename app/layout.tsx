@@ -4,7 +4,13 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Nyantech',
-  description: 'A blog about technology and cats.',
+  description: 'Nyantech',
+  openGraph: {
+    title: 'Nyantech',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
   icons: {
     icon: '/nyantech_logo.svg',
   },
