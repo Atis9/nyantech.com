@@ -1,19 +1,34 @@
-import Layout, { siteTitle, name } from '../../components/layout';
-import { getAllPostIds, getPost, Post } from '../../lib/posts';
-import Head from 'next/head';
-import Date from '../../components/date';
+import Layout from '../../../components/layout';
+import { getAllPostIds, getPost, Post } from '../../../lib/posts';
+import Date from '../../../components/date';
 import 'highlight.js/styles/github.css';
 import Image from 'next/image';
+import { Metadata } from 'next';
 
-export default function showPost({ post }: { post: Post }) {
+export async function generateStaticParams(): Promise<{ id: string }[]> {
+  const postIds = getAllPostIds();
+  return postIds.map((postId) => ({
+    id: postId.id,
+  }));
+}
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
+  const post = await getPost(id);
+  return {
+    title: `${post.title} - Nyantech`,
+    description: post.title,
+  };
+}
+
+export default async function PostPage({ params }: { params: { id: string } }) {
+  const resolvedParams = await params;
+  const id = resolvedParams.id;
+  const post = await getPost(id);
+
   return (
     <Layout home={false}>
-      <Head>
-        <title>
-          {post.title} - {siteTitle}
-        </title>
-        <meta name='og:description' content={post.title} />
-      </Head>
       <article>
         <h1>{post.title}</h1>
         <div className='Box my-3'>
@@ -38,21 +53,4 @@ export default function showPost({ post }: { post: Post }) {
       </article>
     </Layout>
   );
-}
-
-export async function getStaticPaths() {
-  const paths = getAllPostIds();
-  return {
-    paths,
-    fallback: false,
-  };
-}
-
-export async function getStaticProps({ params }: { params: { id: string } }) {
-  const post = await getPost(params.id);
-  return {
-    props: {
-      post,
-    },
-  };
 }

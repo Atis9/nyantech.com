@@ -1,10 +1,8 @@
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 
 export const name: string = 'Atis';
-export const siteTitle: string = 'Nyantech';
 
 export default function Layout({
   children,
@@ -15,17 +13,11 @@ export default function Layout({
 }) {
   return (
     (<div>
-      <Head>
-        <link rel='icon' href='/nyantech_logo.svg' type='image/svg+xml' />
-        <meta name='description' content='Nyantech' />
-        <meta name='og:title' content={siteTitle} />
-        <meta name='twitter:card' content='summary_large_image' />
-      </Head>
       <div className='container'>
         <header className='Header'>
           <div className='container-xl'>
             <div className='Header-item'>
-              <Link href='/' passHref className='Header-link f4 d-flex flex-items-center'>
+              <Link href='/' className='Header-link f4 d-flex flex-items-center'>
 
                 <span className='mr-2'>
                   <Image
@@ -73,7 +65,7 @@ export default function Layout({
 
           <main>{children}</main>
           {!home && (
-            <Link href='/' passHref legacyBehavior>
+            <Link href='/'>
               <button className='btn btn-outline'>
                 <span>← Back to home</span>
               </button>

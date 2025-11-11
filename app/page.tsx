@@ -1,28 +1,13 @@
-import Head from 'next/head';
-import Layout, { siteTitle } from '../components/layout';
-import { getSortedPostSummaries, PostSummary } from '../lib/posts';
 import Link from 'next/link';
 import Date from '../components/date';
+import { getSortedPostSummaries, PostSummary } from '../lib/posts';
+import Layout from '../components/layout';
 
-export async function getStaticProps() {
-  const allPostSummaries = getSortedPostSummaries();
-  return {
-    props: {
-      allPostSummaries,
-    },
-  };
-}
+export default async function Home() {
+  const allPostSummaries: PostSummary[] = getSortedPostSummaries();
 
-export default function Home({
-  allPostSummaries,
-}: {
-  allPostSummaries: PostSummary[];
-}) {
   return (
-    (<Layout home={true}>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+    <Layout home={true}>
       <h1>Blog</h1>
       <div className='Box my-3'>
         <div className='Box-header d-flex'>
@@ -50,6 +35,6 @@ export default function Home({
           </div>
         ))}
       </div>
-    </Layout>)
+    </Layout>
   );
 }
