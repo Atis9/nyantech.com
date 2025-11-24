@@ -21,7 +21,7 @@
     "highlight.js": "^11.11.1",
     "marked": "^17.0.1",
     "marked-highlight": "^2.2.3",
-    "next": "^16.0.1",
+    "next": "^16.0.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "remark-html": "^16.0.1",
