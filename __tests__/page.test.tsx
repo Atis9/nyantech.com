@@ -1,8 +1,9 @@
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import Home from '../app/page';
 
-jest.mock('../lib/posts', () => ({
-  getSortedPostSummaries: jest.fn(() => [
+vi.mock('../lib/posts', () => ({
+  getSortedPostSummaries: vi.fn(() => [
     {
       id: 'test-post-1',
       title: 'テスト投稿1',
