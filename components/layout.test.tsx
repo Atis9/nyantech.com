@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import Layout, { name } from './layout';
+import { profile } from './profile';
 
 describe('Layout component', () => {
   it('ホームページモードでレンダリングされる', () => {
@@ -41,9 +42,10 @@ describe('Layout component', () => {
       </Layout>
     );
 
-    expect(screen.getByText('Code を書き Chord を鳴らし Cord を取り回す人')).toBeInTheDocument();
-    expect(screen.getByText('https://github.com/Atis9')).toBeInTheDocument();
-    expect(screen.getByText('https://x.com/AtiS')).toBeInTheDocument();
+    expect(screen.getByText(profile.bio)).toBeInTheDocument();
+    profile.links.forEach(({ url }) => {
+      expect(screen.getByText(url)).toBeInTheDocument();
+    });
   });
 
   it('ロゴ画像が表示される', () => {

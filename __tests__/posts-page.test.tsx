@@ -22,28 +22,25 @@ describe('Post page', () => {
   });
 
   it('generateMetadataが正しいメタデータを返す', async () => {
-    const metadata = await generateMetadata({ params: { id: 'test-post' } });
+    const metadata = await generateMetadata({ params: Promise.resolve({ id: 'test-post' }) });
     expect(metadata.title).toBe('テスト投稿タイトル - Nyantech');
     expect(metadata.description).toBe('テスト投稿タイトル');
   });
 
   it('投稿タイトルが表示される', async () => {
-    const params = { id: 'test-post' };
-    const PostComponent = await PostPage({ params });
+    const PostComponent = await PostPage({ params: Promise.resolve({ id: 'test-post' }) });
     render(PostComponent);
     expect(screen.getByText('テスト投稿タイトル')).toBeInTheDocument();
   });
 
   it('投稿本文が表示される', async () => {
-    const params = { id: 'test-post' };
-    const PostComponent = await PostPage({ params });
+    const PostComponent = await PostPage({ params: Promise.resolve({ id: 'test-post' }) });
     render(PostComponent);
     expect(screen.getByText('これはテスト投稿の本文です。')).toBeInTheDocument();
   });
 
   it('著者名が表示される', async () => {
-    const params = { id: 'test-post' };
-    const PostComponent = await PostPage({ params });
+    const PostComponent = await PostPage({ params: Promise.resolve({ id: 'test-post' }) });
     render(PostComponent);
     const authorElements = screen.getAllByText('Atis');
     expect(authorElements.length).toBeGreaterThan(0);

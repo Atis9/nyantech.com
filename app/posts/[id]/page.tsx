@@ -1,20 +1,20 @@
 import Layout from '../../../components/layout';
-import { getAllPostIds, getPost, Post } from '../../../lib/posts';
+import { getAllPostIds, getPost } from '../../../lib/posts';
 import Date from '../../../components/date';
 import 'highlight.js/styles/github.css';
 import Image from 'next/image';
 import { Metadata } from 'next';
 
-export async function generateStaticParams(): Promise<{ id: string }[]> {
-  const postIds = getAllPostIds();
-  return postIds.map((postId) => ({
-    id: postId.id,
-  }));
+interface PageProps {
+  params: Promise<{ id: string }>;
 }
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
+export async function generateStaticParams() {
+  return getAllPostIds();
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { id } = await params;
   const post = await getPost(id);
   return {
     title: `${post.title} - Nyantech`,
@@ -22,9 +22,8 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
   };
 }
 
-export default async function PostPage({ params }: { params: { id: string } }) {
-  const resolvedParams = await params;
-  const id = resolvedParams.id;
+export default async function PostPage({ params }: PageProps) {
+  const { id } = await params;
   const post = await getPost(id);
 
   return (
@@ -45,6 +44,7 @@ export default async function PostPage({ params }: { params: { id: string } }) {
               <div className='color-fg-muted'><Date dateString={post.date} /></div>
             </div>
           </div>
+          {/* Content is sanitized in parseMarkdownToHtml() */}
           <div
             className='markdown-body Box-body'
             dangerouslySetInnerHTML={{ __html: post.contentHtml }}

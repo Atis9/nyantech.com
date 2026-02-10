@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import Date from '../components/date';
-import { getSortedPostSummaries, PostSummary } from '../lib/posts';
+import { getSortedPostSummaries } from '../lib/posts';
 import Layout from '../components/layout';
 
 export default async function Home() {
-  const allPostSummaries: PostSummary[] = getSortedPostSummaries();
+  const allPostSummaries = getSortedPostSummaries();
 
   return (
     <Layout home={true}>
@@ -20,7 +20,7 @@ export default async function Home() {
         {allPostSummaries.map(({ id, date, title, author }) => (
           <div className='Box-row Box-row--hover-gray d-flex' key={id}>
             <div className='Box-row-link flex-1 px-2'>
-              <Link href={`/posts/${id}`} passHref>
+              <Link href={`/posts/${id}`}>
                 <strong>{title}</strong>
               </Link>
             </div>
