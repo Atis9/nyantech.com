@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
 
-export async function GET(_request: Request) {
+export async function GET() {
   return NextResponse.json({ name: 'Hello!' });
 }

@@ -6,9 +6,14 @@ import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js';
 import sanitizeHtml from 'sanitize-html';
 
-const postsDirectory: string = path.join(process.cwd(), 'posts');
+const postsDirectory = path.join(process.cwd(), 'posts');
 
-class InvalidIdError extends Error {}
+export class InvalidIdError extends Error {
+  constructor(id: string) {
+    super(`Invalid post ID: ${id}`);
+    this.name = 'InvalidIdError';
+  }
+}
 
 export interface PostSummary {
   id: string;
@@ -17,90 +22,61 @@ export interface PostSummary {
   author: string;
 }
 
-export interface Post {
-  id: string;
-  title: string;
-  date: string;
-  author: string;
+export interface Post extends PostSummary {
   contentHtml: string;
 }
 
+interface PostMetadata {
+  title: string;
+  date: string;
+  author: string;
+}
+
+function extractMetadata(data: matter.GrayMatterFile<string>['data']): PostMetadata {
+  return {
+    title: data.title,
+    date: data.date,
+    author: data.author,
+  };
+}
+
 export function getSortedPostSummaries(): PostSummary[] {
-  const allPostSummaries: PostSummary[] = getAllPostIds().map((path) => {
-    const postSummary: PostSummary = getPostSummary(path.id);
-
-    return postSummary;
-  });
-
-  const sortedPostSummaries = allPostSummaries.sort((a, b) => {
-    if (a.date < b.date) {
-      return 1;
-    } else if (a.date > b.date) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-
-  return sortedPostSummaries;
+  return getAllPostIds()
+    .map(({ id }) => getPostSummary(id))
+    .sort((a, b) => b.date.localeCompare(a.date));
 }
 
 export function getAllPostIds(): { id: string }[] {
-  const fileNames: string[] = fs.readdirSync(postsDirectory);
-  const allPostIds: { id: string }[] = fileNames.map((fileName) => {
-    const id = fileName.replace(/\.md$/, '');
-    return { id };
-  });
-  const validAllPostIds: { id: string }[] = allPostIds.filter(
-    (obj) => {
-      return validateId(obj.id);
-    },
-  );
-
-  return validAllPostIds;
+  return fs.readdirSync(postsDirectory)
+    .map((fileName) => ({ id: fileName.replace(/\.md$/, '') }))
+    .filter(({ id }) => validateId(id));
 }
 
 export function getPostSummary(id: string): PostSummary {
-  const RawPost = loadRawPost(id);
-
-  const title: string = RawPost.data.title;
-  const date: string = RawPost.data.date;
-  const author: string = RawPost.data.author;
-  const postSummary: PostSummary = { id, title, date, author };
-
-  return postSummary;
+  const rawPost = loadRawPost(id);
+  const metadata = extractMetadata(rawPost.data);
+  return { id, ...metadata };
 }
 
 export async function getPost(id: string): Promise<Post> {
-  const RawPost = loadRawPost(id);
-
-  const processedContent = await parseMarkdownToHtml(RawPost.content);
-  const contentHtml: string = processedContent;
-  const title: string = RawPost.data.title;
-  const date: string = RawPost.data.date;
-  const author: string = RawPost.data.author;
-  const post: Post = { id, contentHtml, title, date, author };
-
-  return post;
+  const rawPost = loadRawPost(id);
+  const metadata = extractMetadata(rawPost.data);
+  const contentHtml = await parseMarkdownToHtml(rawPost.content);
+  return { id, ...metadata, contentHtml };
 }
 
 function loadRawPost(id: string): matter.GrayMatterFile<string> {
   if (!validateId(id)) {
-    throw new InvalidIdError();
+    throw new InvalidIdError(id);
   }
 
-  const fullPath: string = path.join(postsDirectory, `${id}.md`);
-  const fileContents: string = fs.readFileSync(fullPath, 'utf8');
-  const RawPost = matter(fileContents);
-
-  return RawPost;
+  const fullPath = path.join(postsDirectory, `${id}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  return matter(fileContents);
 }
 
-function validateId(id: string): Boolean {
-  const validateRegExp: RegExp = /(\w|-)+/;
-  const validResult = validateRegExp.test(id);
-
-  return validResult;
+function validateId(id: string): boolean {
+  return /^[\w-]+$/.test(id);
 }
 
 async function parseMarkdownToHtml(markdown: string): Promise<string> {
@@ -120,12 +96,10 @@ async function parseMarkdownToHtml(markdown: string): Promise<string> {
     silent: false,
   });
 
-  const html = sanitizeHtml(await marked.parse(markdown), {
+  return sanitizeHtml(await marked.parse(markdown), {
     allowedClasses: {
       code: ['language-*', 'lang-*', 'nohighlight'],
       '*': ['hljs-*'],
     },
   });
-
-  return html;
 }

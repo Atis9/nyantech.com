@@ -2,8 +2,7 @@ import { GET } from '../app/api/hello/route';
 
 describe('API /api/hello', () => {
   it('GETリクエストでJSONレスポンスを返す', async () => {
-    const request = {} as Request;
-    const response = await GET(request);
+    const response = await GET();
     const data = await response.json();
 
     expect(response.status).toBe(200);
@@ -11,8 +10,7 @@ describe('API /api/hello', () => {
   });
 
   it('レスポンスが正しいステータスコードを返す', async () => {
-    const request = {} as Request;
-    const response = await GET(request);
+    const response = await GET();
 
     expect(response.status).toBe(200);
   });
