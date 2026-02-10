@@ -1,3 +1,4 @@
+import { vi } from 'vitest';
 import {
   getSortedPostSummaries,
   getAllPostIds,
@@ -7,23 +8,27 @@ import {
   Post,
 } from './posts';
 
-jest.mock('marked', () => ({
-  Marked: jest.fn().mockImplementation(() => ({
-    use: jest.fn(),
-    parse: jest.fn().mockResolvedValue('<p>Mocked HTML</p>'),
-  })),
+vi.mock('marked', () => ({
+  Marked: class {
+    use() {}
+    async parse() {
+      return '<p>Mocked HTML</p>';
+    }
+  },
 }));
 
-jest.mock('marked-highlight', () => ({
-  markedHighlight: jest.fn(),
+vi.mock('marked-highlight', () => ({
+  markedHighlight: vi.fn(),
 }));
 
-jest.mock('highlight.js', () => ({
-  getLanguage: jest.fn().mockReturnValue(true),
-  highlight: jest.fn().mockReturnValue({ value: 'highlighted code' }),
+vi.mock('highlight.js', () => ({
+  getLanguage: vi.fn().mockReturnValue(true),
+  highlight: vi.fn().mockReturnValue({ value: 'highlighted code' }),
 }));
 
-jest.mock('sanitize-html', () => jest.fn((html) => html));
+vi.mock('sanitize-html', () => ({
+  default: vi.fn((html) => html),
+}));
 
 describe('posts lib', () => {
   describe('getAllPostIds', () => {

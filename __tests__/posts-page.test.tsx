@@ -1,11 +1,12 @@
 import { render, screen } from '@testing-library/react';
+import { vi } from 'vitest';
 import PostPage, { generateStaticParams, generateMetadata } from '../app/posts/[id]/page';
 
-jest.mock('../lib/posts', () => ({
-  getAllPostIds: jest.fn(() => [
+vi.mock('../lib/posts', () => ({
+  getAllPostIds: vi.fn(() => [
     { id: 'test-post' },
   ]),
-  getPost: jest.fn(async (id: string) => ({
+  getPost: vi.fn(async (id: string) => ({
     id,
     title: 'テスト投稿タイトル',
     date: '2025-11-11',
