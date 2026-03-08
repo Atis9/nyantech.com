@@ -28,11 +28,14 @@ export default async function PostPage({ params }: PageProps) {
 
   return (
     <Layout home={false}>
-      <article>
-        <h1>{post.title}</h1>
-        <div className='border rounded-2 my-3'>
-          <div className='color-bg-subtle d-flex flex-column flex-md-row flex-items-center p-3 border-bottom rounded-top-2'>
+      <article className='border rounded-2 my-3'>
+        <div className='color-bg-subtle px-3 py-2 border-bottom rounded-top-2'>
+          <h1 className='f3 m-0'>{post.title}</h1>
+        </div>
+        <div>
+          <div className='d-flex flex-column flex-md-row flex-items-center p-3 border-bottom'>
             <Image
+              className='avatar circle'
               priority
               src={`/images/${post.author}.png`}
               height={48}
@@ -40,8 +43,8 @@ export default async function PostPage({ params }: PageProps) {
               alt={post.author}
             />
             <div className='col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-3'>
-              <div className='f5 text-bold'>{post.author}</div>
               <div className='color-fg-muted f6'><Date dateString={post.date} /></div>
+              <div className='f5 text-bold'>{post.author}</div>
             </div>
           </div>
           {/* Content is sanitized in parseMarkdownToHtml() */}

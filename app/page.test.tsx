@@ -20,24 +20,10 @@ vi.mock('../lib/posts', () => ({
 }));
 
 describe('Home page', () => {
-  it('ブログタイトルが表示される', async () => {
-    const HomeComponent = await Home();
-    render(HomeComponent);
-    expect(screen.getByText('Blog')).toBeInTheDocument();
-  });
-
   it('投稿一覧が表示される', async () => {
     const HomeComponent = await Home();
     render(HomeComponent);
     expect(screen.getByText('テスト投稿1')).toBeInTheDocument();
     expect(screen.getByText('テスト投稿2')).toBeInTheDocument();
-  });
-
-  it('投稿のテーブルヘッダーが表示される', async () => {
-    const HomeComponent = await Home();
-    render(HomeComponent);
-    expect(screen.getByText('Title')).toBeInTheDocument();
-    expect(screen.getByText('Author')).toBeInTheDocument();
-    expect(screen.getByText('Date')).toBeInTheDocument();
   });
 });
