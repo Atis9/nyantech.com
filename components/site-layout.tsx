@@ -26,7 +26,7 @@ export default function SiteLayout({ children, home }: SiteLayoutProps) {
                   alt={name}
                 />
               </span>
-              <span className='text-bold'>Nyantech</span>
+              <h1 className='text-bold m-0'>Nyantech</h1>
             </Link>
           </div>
         </div>
