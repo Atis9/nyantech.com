@@ -13,26 +13,26 @@ interface SiteLayoutProps {
 export default function SiteLayout({ children, home }: SiteLayoutProps) {
   return (
     <div>
-      <div className='container'>
-        <header className='Header'>
-          <div className='container-xl'>
-            <div className='Header-item'>
-              <Link href='/' className='Header-link f4 d-flex flex-items-center'>
-                <span className='mr-2'>
-                  <Image
-                    priority
-                    src='/nyantech_logo.svg'
-                    height={32}
-                    width={32}
-                    alt={name}
-                  />
-                </span>
-                <span>Nyantech</span>
-              </Link>
-            </div>
+      <header className='Header'>
+        <div className='container-xl'>
+          <div className='Header-item mx-auto'>
+            <Link href='/' className='Header-link f1 d-flex flex-items-center'>
+              <span className='mr-2 d-flex'>
+                <Image
+                  priority
+                  src='/nyantech_logo.svg'
+                  height={32}
+                  width={32}
+                  alt={name}
+                />
+              </span>
+              <h1 className='text-bold m-0'>Nyantech</h1>
+            </Link>
           </div>
-        </header>
+        </div>
+      </header>
 
+      <div className='container'>
         <div className='container-md p-4'>
           <ProfileCard />
           <main>{children}</main>
