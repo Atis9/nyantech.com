@@ -1,4 +1,4 @@
-import Layout from '../../../components/layout';
+import Layout from '../../../components/site-layout';
 import { getAllPostIds, getPost } from '../../../lib/posts';
 import Date from '../../../components/date';
 import 'highlight.js/styles/github.css';

@@ -5,12 +5,12 @@ import ProfileCard, { profile } from './profile';
 
 export const name = profile.name;
 
-interface LayoutProps {
+interface SiteLayoutProps {
   children: ReactNode;
   home: boolean;
 }
 
-export default function Layout({ children, home }: LayoutProps) {
+export default function SiteLayout({ children, home }: SiteLayoutProps) {
   return (
     <div>
       <div className='container'>

@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
-import PostPage, { generateStaticParams, generateMetadata } from '../app/posts/[id]/page';
+import PostPage, { generateStaticParams, generateMetadata } from './page';
 
-vi.mock('../lib/posts', () => ({
+vi.mock('../../../lib/posts', () => ({
   getAllPostIds: vi.fn(() => [
     { id: 'test-post' },
   ]),

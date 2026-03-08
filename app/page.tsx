@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Date from '../components/date';
 import { getSortedPostSummaries } from '../lib/posts';
-import Layout from '../components/layout';
+import Layout from '../components/site-layout';
 
 export default async function Home() {
   const allPostSummaries = getSortedPostSummaries();
