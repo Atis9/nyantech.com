@@ -3,3 +3,59 @@
 body {
   font-family: 'BIZ UDPGothic', sans-serif;
 }
+
+// Box component styles (removed in @primer/css v22)
+.Box {
+  border: 1px solid var(--borderColor-default, #d0d7de);
+  border-radius: 6px;
+  background-color: var(--bgColor-default, #fff);
+}
+
+.Box-header {
+  padding: 16px;
+  margin: -1px -1px 0;
+  background-color: var(--bgColor-muted, #f6f8fa);
+  border: 1px solid var(--borderColor-default, #d0d7de);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  font-weight: 600;
+}
+
+.Box-body {
+  padding: 16px;
+  border-bottom: 1px solid var(--borderColor-default, #d0d7de);
+
+  &:last-of-type {
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+}
+
+.Box-title {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.Box-row {
+  padding: 8px 16px;
+  border-top: 1px solid var(--borderColor-muted, #d8dee4);
+
+  &:first-of-type {
+    border-top: 0;
+  }
+
+  &.Box-row--hover-gray:hover {
+    background-color: var(--bgColor-muted, #f6f8fa);
+  }
+}
+
+.Box-row-link {
+  a {
+    color: var(--fgColor-default, #1f2328);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--fgColor-accent, #0969da);
+    }
+  }
+}

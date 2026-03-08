@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ja">
+    <html lang="ja" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
       <body>{children}</body>
     </html>
   );
