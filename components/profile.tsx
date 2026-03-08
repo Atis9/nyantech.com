@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { profile } from './profile-data';
+import { profile } from '../lib/profile-data';
 
-export { profile } from './profile-data';
+export { profile } from '../lib/profile-data';
 
 export default function ProfileCard() {
   return (
