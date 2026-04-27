@@ -19,12 +19,12 @@
     "date-fns": "^4.1.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.11.1",
-    "marked": "^18.0.0",
+    "marked": "^18.0.2",
     "marked-highlight": "^2.2.4",
-    "next": "^16.2.3",
+    "next": "^16.2.4",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "sanitize-html": "^2.17.2",
+    "sanitize-html": "^2.17.3",
     "sass": "^1.99.0"
   },
   "devDependencies": {
@@ -37,12 +37,12 @@
     "@types/react": "^19.2.14",
     "@types/sanitize-html": "^2.16.1",
     "@vitejs/plugin-react": "^6.0.1",
-    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/coverage-v8": "^4.1.5",
     "eslint": "^9.39.4",
-    "eslint-config-next": "^16.2.3",
+    "eslint-config-next": "^16.2.4",
     "jiti": "^2.6.1",
-    "jsdom": "^29.0.2",
-    "typescript": "^6.0.2",
+    "jsdom": "^29.1.0",
+    "typescript": "^6.0.3",
     "vitest": "^4.0.18"
   }
 }
